@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Kejuatan Buat Lia!</title>
+    <style>
+        body {
+            background-color: #04383f;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+            color: white;
+            position: relative;
+            overflow-x: hidden;
+        }
+        #tes {
+            width: 250px;
+            height: 150px;
+            margin: 20px auto;
+            display: block;
+            cursor: pointer;
+        }
+        #pesan {
+            margin-top: 30px;
+            font-size: 24px;
+        }
+        #nil {
+            width: 100px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+        #judul-lagu {
+            position: fixed;
+            bottom: 10px;
+            right: 140px;
+            font-size: 16px;
+            color: white;
+        }
+        #gifEnding {
+            margin: 50px auto 0;
+            width: 300px;
+            display: none;
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
+    </style>
+</head>
+<body>
+    <h1>Halooo liaaa sinefil! (o^.^o)</h1>
+    <p>Makasihhh yaaa sudah merekomendasiin film-film keren ✋😧🤚</p>
+    <p id="intro">Ada kejutan nihhh!, coba pencet kado nya eakk :p</p>
+
+    <!-- Gambar kado -->
+    <img id="tes" src="tes.png" alt="tes" onclick="pencetKado()">
+
+    <div id="pesan"></div>
+
+    <!-- Gambar vinyl -->
+    <img id="nil" src="nil.gif" alt="nil">
+    <div id="judul-lagu">Lagu apa hayooo </div>
+
+    <!-- Lagu -->
+    <audio id="lagu" loop>
+        <source src="lagu.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- GIF Ending -->
+    <img id="gifEnding" src="gif.gif" alt="Ajakan Date">
+
+    <!-- Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <script>
+        let klikCount = 0;
+
+        function pencetKado() {
+            klikCount++;
+            let pesan = document.getElementById("pesan");
+            let gifEnding = document.getElementById("gifEnding");
+            let lagu = document.getElementById("lagu");
+
+            if (klikCount === 1) {
+                pesan.innerHTML = "Pencet Kadonyaaa";
+            } else if (klikCount === 2) {
+                pesan.innerHTML = "Pencet lagiii";
+            } else if (klikCount === 3) {
+                pesan.innerHTML = "Pencet sekali lagi!";
+            } else if (klikCount === 4) {
+                pesan.innerHTML = "Lah kok kosong?";
+            } else if (klikCount === 5) {
+                pesan.innerHTML = "Coba pencet lagi!";
+            } else {
+                // HIDE semua
+                pesan.style.display = "none";
+                document.getElementById("tes").style.display = "none";
+                document.getElementById("intro").style.display = "none";
+                // PLAY musik (karena udah ada interaksi user)
+                lagu.play();
+                // SHOW GIF + Fade In
+                gifEnding.style.display = "block";
+                setTimeout(() => {
+                    gifEnding.style.opacity = 1;
+                }, 50);
+
+                // CONFETTI ledakan!!
+                confetti({
+                    particleCount: 200,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
